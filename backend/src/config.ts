@@ -1,11 +1,11 @@
 export default () => ({
-  port: parseInt(process.env.PORT) || 3001,
+  port: parseInt(process.env.PORT) || 3000,
   database: {
-    host: process.env.DATABASE_HOST || 'localhost',
-    port: parseInt(process.env.DATABASE_PORT) || 5432,
-    username: process.env.DATABASE_USER || 'student',
-    password: process.env.DATABASE_PASSWORD || 'student',
-    database: process.env.DATABASE_NAME || 'kupipodariday',
+    host: process.env.POSTGRES_HOST || 'postgres',
+    port: parseInt(process.env.POSTGRES_HOST, 10) || 5432,
+    username: process.env.POSTGRES_USER || 'student',
+    password: process.env.POSTGRES_PASSWORD || 'student',
+    database: process.env.POSTGRES_DB || 'kupipodariday',
   },
   JWT_SECRET: process.env.JWT_SECRET || 'some-secret-key',
 });
