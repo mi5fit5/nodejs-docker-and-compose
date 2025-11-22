@@ -1,5 +1,5 @@
-# multi-stage build
-# 1. Подготовка образа для сборки приложения
+# Multi-stage build
+# 1. First stage
 FROM node:16-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
@@ -7,7 +7,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# 2. Итоговый образ
+# 2. Second stage
 FROM node:16-alpine AS production
 WORKDIR /app
 COPY --from=builder /app/package*.json ./

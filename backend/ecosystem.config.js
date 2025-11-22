@@ -8,7 +8,7 @@ const {
   POSTGRES_PGDATA,
 } = process.env;
 
-export const apps = [
+module.exports = [
   {
     name: 'backend',
     script: 'dist/main.js',
