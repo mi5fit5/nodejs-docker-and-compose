@@ -6,6 +6,7 @@ const {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_PGDATA,
+  JWT_SECRET,
 } = process.env;
 
 module.exports = [
