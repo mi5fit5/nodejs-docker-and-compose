@@ -1,0 +1,55 @@
+version: "3.9"
+services:
+  # Frontend
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    networks:
+      - http-network
+    restart: unless-stopped
+
+  # Backend
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    ports:
+      - "4000:3000"
+    depends_on:
+      - database
+    networks:
+      - db-network
+      - http-network
+    restart: unless-stopped
+
+  # Database
+  database:
+    container_name: database
+    image: "postgres:16-alpine"
+    env_file:
+      - ./backend/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - db-network
+    restart: unless-stopped
+
+# Volumes
+volumes:
+  postgres_data:
+
+# Networks
+networks:
+  db-network:
+    driver: bridge
+  http-network:
+    driver: bridge
